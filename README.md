@@ -144,6 +144,8 @@ powershell scripts/acr-upkeep.ps1 -Action push     # Stage, commit, and push pen
 ---
 
 ## Documentation Directory
+- [**Quick Start Guide (5 Minutes)**](docs/getting-started/quickstart.md)
+- [**AI Automated QA Audit Reports (Claude Sonnet & OpenCode GLM 5.3)**](docs/qa/ai-audit-reports.md)
 - [Architecture Overview](docs/architecture/overview.md)
 - [Consensus & Mandatory Dissent](docs/architecture/consensus-and-dissent.md)
 - [Zero-Trust Identity & W3C DID](docs/architecture/zero-trust-identity.md)
