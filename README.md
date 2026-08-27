@@ -20,10 +20,18 @@
 
 ## Video Showcase (Rendered with HyperFrames)
 
-> **Watch the 15-Second Protocol & Web Client Tour**:
-> [`assets/acr-protocol-showcase.mp4`](assets/acr-protocol-showcase.mp4)
-> 
-> *Rendered deterministically from HTML, CSS, and GSAP timelines via [HyperFrames](http://localhost:3300/ACR/acr-docs/tree/main/video), showcasing the Live Deliberation Floor, Proposals Drawer, Preserved Dissent Log, and 8-Repo Ecosystem.*
+<p align="center">
+  <video src="assets/acr-protocol-showcase.mp4" controls autoplay loop muted playsinline width="100%" style="max-width:960px; border-radius:12px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.15);">
+    <source src="assets/acr-protocol-showcase.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</p>
+
+<p align="center">
+  <a href="assets/acr-protocol-showcase.mp4"><b>▶ Direct Video Download &amp; Playback (1080p • 15s • MP4)</b></a>
+</p>
+
+> *Rendered deterministically from HTML, CSS, and GSAP timelines via [HyperFrames](video/index.html), showcasing the Live Deliberation Floor, Proposals Drawer, Preserved Dissent Log, and 8-Repo Ecosystem.*
 
 ---
 
