@@ -74,3 +74,38 @@ The ACR Meta-MCP Forward Proxy implements the dual-layer MCP governance fabric f
 | `POST` | `/api/v1/meta-mcp/tools/call` | Execute governed tool invocation |
 | `GET` | `/api/v1/meta-mcp/audit` | Replay cryptographic audit trail |
 | `POST` | `/mcp` | Streamable HTTP JSON-RPC 2.0 MCP Gateway |
+
+---
+
+## 5. Ideal Installation Path & Ecosystem Integration
+
+### 5.1 Canonical Deployment Architecture
+- **Repository Location**: `http://localhost:3300/ACR/acr-meta-mcp.git`
+- **NPM Package**: `@acr-js/meta-mcp` (or `@acr-js/meta-mcp-proxy`)
+- **Default Workstation Port**: `20445` (REST: `http://localhost:20445/api/v1/meta-mcp/`, MCP Gateway: `http://localhost:20445/mcp`)
+- **Companion Service**: Runs alongside `acr-core` (`http://localhost:20443`) as the dedicated MCP forward proxy and governance control plane.
+
+### 5.2 Real-World MCP Server Integration (Context7 Example)
+Context7 provides automated real-time library documentation lookups (`resolve-library-id`, `query-docs`).
+
+**`mcp_config.json` configuration:**
+```json
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp", "--api-key", "ctx7sk-368b8367-c3ec-436e-8df3-74f1526f86fe"],
+      "env": {
+        "CONTEXT7_API_KEY": "ctx7sk-368b8367-c3ec-436e-8df3-74f1526f86fe"
+      }
+    }
+  }
+}
+```
+
+When imported via `acr meta-mcp import` or the Web Governance Studio:
+1. `CONTEXT7_API_KEY` is redacted and vaulted into AES-256-GCM Auth Vault (`sec_ref_...`).
+2. Server is launched within `workspace-scoped` containment profile.
+3. Tools are namespaced as `context7__resolve-library-id` and `context7__query-docs`.
+4. Governed tool calls are audited with sub-millisecond replay latency.
+
