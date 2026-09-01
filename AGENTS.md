@@ -1,6 +1,6 @@
 # Agent Guidelines - acr-docs
 
-## Documentation Discipline
-1. **Public Consumption**: Keep explanations clean, authoritative, and focused on protocol value.
-2. **Accuracy**: Ensure all code snippets, endpoint definitions, and schema structures match the reference Go daemon (`acr-core`) and Dart CLI (`acr-cli`).
-3. **Media Integrity**: Preserve the animated SVG header and HyperFrames video assets in `assets/`.
+## Documentation Integrity Discipline
+1. **Precision & Truth**: Documentation must reflect actual code implementations in `acr-core`, `acr-node`, and `acr-cloud`.
+2. **Architecture Visualizations**: Use standard Mermaid diagrams for sequence flows, state machines, and Merkle DAG structures.
+3. **Link Format**: Maintain relative links for local repository exploration and canonical Gitea/GitHub links for remote refs.
