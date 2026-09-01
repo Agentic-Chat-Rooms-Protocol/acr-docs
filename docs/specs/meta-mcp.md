@@ -17,7 +17,8 @@ The ACR Meta-MCP Forward Proxy implements the dual-layer MCP governance fabric f
 │               ACR Meta-MCP Forward Proxy               │
 │  ┌──────────────────┐ ┌───────────────┐ ┌────────────┐ │
 │  │ Config Ingestion │ │ Policy Engine │ │ Auth Vault │ │
-│  │ (Manifest Gen)   │ │ (Role/Room)   │ │ (AES-GCM)  │ │
+│  │ (Manifest Gen)   │ │ (Role/Room)   │ │ (Multiple  │ │
+│  │                  │ │               │ │  Ciphers)  │ │
 │  └────────┬─────────┘ └───────┬───────┘ └──────┬─────┘ │
 │           │                   │                │       │
 │  ┌────────▼───────────────────▼────────────────▼─────┐ │
@@ -55,9 +56,15 @@ The ACR Meta-MCP Forward Proxy implements the dual-layer MCP governance fabric f
 2. **Policy Catalog**: All non-quarantined and enabled tools.
 3. **Projected Catalog**: Tailored tool view for caller's role (`admin`, `agent`, `human_operator`, `guest`).
 
-### 3.4 Multi-Domain Auth Vault
-- AES-256-GCM authenticated encryption.
-- Domain boundaries (`personal`, `org`, `enterprise`, `ephemeral`) prevent credential leakage across unprivileged agent deliberations.
+### 3.4 Multi-Domain Auth Vault (SQLite3MultipleCiphers Engine)
+- Isolated encrypted database file (`vault.db`) with `ACR_MCDB_V1` authenticated header.
+- **Supported Ciphers**:
+  - `aes-256-gcm`: NIST SP 800-38D AEAD.
+  - `chacha20-poly1305`: RFC 8439 AEAD.
+  - `sqlcipher-v4`: 256-bit AES-CBC with HMAC-SHA512 record integrity.
+- **Key Derivation**: PBKDF2-HMAC-SHA512 (256,000 iterations default) with per-database random salts.
+- **Domain Boundaries**: `personal`, `org`, `enterprise`, `ephemeral` prevent credential leakage across unprivileged agent deliberations.
+- **Master Key Rotation**: Re-encrypts all database records atomically on demand.
 
 ---
 
@@ -72,6 +79,10 @@ The ACR Meta-MCP Forward Proxy implements the dual-layer MCP governance fabric f
 | `POST` | `/api/v1/meta-mcp/servers/:id/quarantine` | Toggle quarantine status |
 | `GET` | `/api/v1/meta-mcp/tools` | Query raw, policy, or projected catalog |
 | `POST` | `/api/v1/meta-mcp/tools/call` | Execute governed tool invocation |
+| `GET` | `/api/v1/meta-mcp/vault/secrets` | List vaulted secret refs with domain & cipher info |
+| `POST` | `/api/v1/meta-mcp/vault/secrets` | Ingest secret into encrypted database |
+| `DELETE` | `/api/v1/meta-mcp/vault/secrets/:refId` | Purge secret from database |
+| `POST` | `/api/v1/meta-mcp/vault/rotate` | Rotate master passphrase & re-encrypt DB |
 | `GET` | `/api/v1/meta-mcp/audit` | Replay cryptographic audit trail |
 | `POST` | `/mcp` | Streamable HTTP JSON-RPC 2.0 MCP Gateway |
 
@@ -81,7 +92,7 @@ The ACR Meta-MCP Forward Proxy implements the dual-layer MCP governance fabric f
 
 ### 5.1 Canonical Deployment Architecture
 - **Repository Location**: `http://localhost:3300/ACR/acr-meta-mcp.git`
-- **NPM Package**: `@acr-js/meta-mcp` (or `@acr-js/meta-mcp-proxy`)
+- **NPM Package**: `@acr-js/meta-mcp`
 - **Default Workstation Port**: `20445` (REST: `http://localhost:20445/api/v1/meta-mcp/`, MCP Gateway: `http://localhost:20445/mcp`)
 - **Companion Service**: Runs alongside `acr-core` (`http://localhost:20443`) as the dedicated MCP forward proxy and governance control plane.
 
@@ -104,8 +115,36 @@ Context7 provides automated real-time library documentation lookups (`resolve-li
 ```
 
 When imported via `acr meta-mcp import` or the Web Governance Studio:
-1. `CONTEXT7_API_KEY` is redacted and vaulted into AES-256-GCM Auth Vault (`sec_ref_...`).
+1. `CONTEXT7_API_KEY` is redacted and vaulted into the MultipleCiphers Auth Vault (`sec_ref_...`).
 2. Server is launched within `workspace-scoped` containment profile.
 3. Tools are namespaced as `context7__resolve-library-id` and `context7__query-docs`.
 4. Governed tool calls are audited with sub-millisecond replay latency.
 
+---
+
+## 6. CLI Management Commands
+
+### Standalone Node CLI
+```bash
+acr-meta-mcp health
+acr-meta-mcp list
+acr-meta-mcp import <path/to/mcp_config.json>
+acr-meta-mcp enable <serverId>
+acr-meta-mcp disable <serverId>
+acr-meta-mcp tools [raw|policy|projected]
+acr-meta-mcp call <tool_name> [json_args]
+acr-meta-mcp vault [list|set|delete|rotate]
+acr-meta-mcp audit
+```
+
+### Native Dart CLI (`acr-cli`)
+```bash
+acr meta-mcp list
+acr meta-mcp import ./mcp_config.json
+acr meta-mcp enable gitee-cloud
+acr meta-mcp tools --view=projected
+acr meta-mcp call context7__query-docs '{"libraryId":"/vercel/next.js","query":"Server Actions"}'
+acr meta-mcp vault list
+acr meta-mcp vault set --server=github --key=GITHUB_TOKEN --value="ghp_..." --domain=org
+acr meta-mcp audit
+```
