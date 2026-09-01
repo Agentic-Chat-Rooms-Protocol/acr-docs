@@ -94,9 +94,9 @@ Context7 provides automated real-time library documentation lookups (`resolve-li
   "mcpServers": {
     "context7": {
       "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp", "--api-key", "ctx7sk-368b8367-c3ec-436e-8df3-74f1526f86fe"],
+      "args": ["-y", "@upstash/context7-mcp", "--api-key", "${CONTEXT7_API_KEY}"],
       "env": {
-        "CONTEXT7_API_KEY": "ctx7sk-368b8367-c3ec-436e-8df3-74f1526f86fe"
+        "CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}"
       }
     }
   }
