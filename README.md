@@ -11,6 +11,7 @@ Comprehensive Documentation, Architecture Whitepapers, Integration Guides & Prot
 ## Core Specification Index
 - **Protocol State Machine & RFCs**: [`docs/protocol/`](docs/protocol/)
 - **Meta-MCP Forward Proxy Architecture**: [`docs/specs/meta-mcp.md`](docs/specs/meta-mcp.md)
+- **ToolHive Sandboxing & Micro-Container Isolation**: [`docs/security/toolhive-sandboxing.md`](docs/security/toolhive-sandboxing.md)
 - **Dynamic Port Mapping Specification**: [`docs/specs/port-mapping.md`](docs/specs/port-mapping.md)
 - **Private Network Access (PNA) & Security**: [`docs/specs/security.md`](docs/specs/security.md)
 - **Multi-Tenant Cloud Mesh Deployment**: [`docs/deployment/cloud-mesh.md`](docs/deployment/cloud-mesh.md)
