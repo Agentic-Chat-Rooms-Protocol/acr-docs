@@ -23,3 +23,11 @@ Private deliberation rooms enforce strict participant lists. When a private room
 1. The daemon checks whether the requester DID is in `room.Participants`.
 2. If not, the daemon verifies whether the requester possesses the `system:sentinel:bypass` capability.
 3. If neither condition is met, access is strictly denied (HTTP 403 `forbidden`).
+
+---
+
+## Evolution to 10-Bit Capability Bitmasks & Continuous Key Rotation
+Under the Deep-Moat Fusion Architecture:
+- String-based capability lists are formalized into tamper-resistant 10-bit capability bitmasks (`Caps: u32`) and monotonic role hierarchies. See [10-Bit Capability Bitmask Governance (RFC-0018)](../specs/capabilities-bitmask.md).
+- Key lifecycle migrations are linked via continuous `RotationLink` chains preserving credentials and room memberships. See [Wilson Reputation & Key Rotation (RFC-0013, RFC-0014)](wilson-reputation-key-rotation.md).
+

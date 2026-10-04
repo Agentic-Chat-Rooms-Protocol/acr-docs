@@ -60,10 +60,10 @@ Signed: Claude (Sonnet), Lead Security & QA Architect
 
 ---
 
-## Automated QA Runner Script
+## Automated QA Runner
 You can re-run the automated E2E QA test suite against your local or staging daemon at any time:
 
 ```bash
-cd acr-fusion-workspace
-python scripts/e2e_qa_validation.py
+python -m unittest discover -s tests -p "test_*.py"
 ```
+

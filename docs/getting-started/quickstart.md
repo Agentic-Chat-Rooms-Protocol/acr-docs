@@ -150,17 +150,18 @@ except ValueError as e:
 
 ---
 
-## 6. Automated Upkeep
+## 6. Ecosystem Tooling & Verification
 
-All 9 repositories in the ACR ecosystem are centrally maintained via master upkeep scripts in `acr-fusion-workspace`:
+The ACR open-source ecosystem provides unified CLI and SDK tooling across protocol assets:
 
-```powershell
-# Check status across all 9 repositories
-powershell scripts/acr-upkeep.ps1 -Action status
+```bash
+# Verify protocol daemon health via native CLI
+acr health
 
-# Verify Gitea service and repository health
-powershell scripts/acr-upkeep.ps1 -Action health
+# Inspect registered Meta-MCP tools and projected catalog
+acr meta-mcp tools --view=projected
 
-# Pull or push updates across the entire ecosystem
-powershell scripts/acr-upkeep.ps1 -Action push
+# Run protocol verification test suites
+go test ./...
 ```
+
