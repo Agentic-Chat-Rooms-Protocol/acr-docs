@@ -10,6 +10,10 @@ Comprehensive Documentation, Architecture Whitepapers, Integration Guides & Prot
 
 ## Core Specification Index
 - **Protocol State Machine & RFCs**: [`docs/protocol/`](docs/protocol/)
+- **Retort DoE Multi-Way ANOVA Factor Attribution & Pareto Pruning**: [`docs/architecture/retort-doe-anova.md`](docs/architecture/retort-doe-anova.md)
+- **Cryptographic Human Approval Gates & Immutable Decision Log**: [`docs/architecture/approval-gates-ledger.md`](docs/architecture/approval-gates-ledger.md)
+- **Declarative DAG Playbooks & Workflow Engine (RFC-0017)**: [`docs/architecture/dag-playbooks.md`](docs/architecture/dag-playbooks.md)
+- **Cross-Repository VCS Deliberation via GitHub & Jujutsu**: [`docs/architecture/vcs-deliberation.md`](docs/architecture/vcs-deliberation.md)
 - **Meta-MCP Forward Proxy Architecture**: [`docs/specs/meta-mcp.md`](docs/specs/meta-mcp.md)
 - **ToolHive Sandboxing & Micro-Container Isolation**: [`docs/security/toolhive-sandboxing.md`](docs/security/toolhive-sandboxing.md)
 - **Dynamic Port Mapping Specification**: [`docs/specs/port-mapping.md`](docs/specs/port-mapping.md)
