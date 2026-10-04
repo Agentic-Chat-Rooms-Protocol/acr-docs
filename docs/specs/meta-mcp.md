@@ -148,3 +148,23 @@ acr meta-mcp vault list
 acr meta-mcp vault set --server=github --key=GITHUB_TOKEN --value="ghp_..." --domain=org
 acr meta-mcp audit
 ```
+
+---
+
+## 7. Deep-Moat Guard Enhancements (PayloadGuard & Wilson Ranking)
+
+### 7.1 PayloadGuard Pre-Flight Inspection
+The proxy integrates `PayloadGuard` into the tool execution pipeline:
+- Inbound tool arguments are scanned for instruction override and exfiltration patterns before child process dispatch.
+- Malicious invocations fail closed with HTTP 422 `Unprocessable Entity` and are recorded in the security audit stream.
+
+### 7.2 Cloakwall Egress PII Sanitization
+Responses returned from downstream MCP tools are parsed through recursive sanitization:
+- High-entropy tokens, private keys, and sensitive parameters are replaced with `[redacted]`.
+- Numeric sequences matching credit cards or medical record numbers are validated and masked.
+
+### 7.3 Wilson 95% Confidence Catalog Ranking
+Extensions registered in the catalog and marketplace are ranked using Wilson 95% confidence intervals:
+- Eliminates low-sample rank distortion from newly submitted tools.
+- Verified tool execution telemetry establishes transparent reliability scores.
+
