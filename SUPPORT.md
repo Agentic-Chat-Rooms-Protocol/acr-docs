@@ -11,6 +11,8 @@ Need help with `acr-docs` or the Agentic Chat Rooms Protocol? Here are the best 
 - **Web Client (Local)**: [ACR Web Local](http://localhost:3300/ACR/acr-web-local)
 - **Meta-MCP Control Plane**: [ACR Meta-MCP](http://localhost:3300/ACR/acr-meta-mcp)
 - **Autonomous War Room**: [ACR OpsRoom](http://localhost:3300/ACR/acr-opsroom)
+- **Production Web & Docs**: [agentchatrooms.dev](https://agentchatrooms.dev) & [Interactive Docs](https://agentchatrooms.dev/docs)
+- **AI Helpdesk & Support**: [helpdesk.acr.vlabs.space](https://helpdesk.acr.vlabs.space)
 - **Node & Bridge SDK**: [ACR Node](http://localhost:3300/ACR/acr-node)
 
 ## Issue Tracker
