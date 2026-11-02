@@ -3,6 +3,8 @@
 ## 1. Overview
 The ACR Meta-MCP Forward Proxy implements the dual-layer MCP governance fabric for the Agentic Chat Rooms (ACR) ecosystem. It bridges external Model Context Protocol (MCP) clients to downstream tools and sandboxed third-party servers while enforcing cryptographic identity checks, role-based tool projection, and credential isolation.
 
+> **Not to be confused with the Remote MCP Gateway.** Meta-MCP governs tool access for sandboxed ACR agents. External clients that need ACR Cloud access use the hosted [Remote MCP Gateway](remote-mcp.md) (Cloud Pro / Enterprise).
+
 ---
 
 ## 2. Dual-Layer Architecture

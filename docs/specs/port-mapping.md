@@ -13,7 +13,9 @@ The **ACR Dynamic Port Mapping Architecture** allows developers, node operators,
 | `acr-meta-mcp` | `20445` | HTTP / JSON-RPC | `ACR_META_MCP_PORT` | Meta-MCP forward proxy, ToolHive sandboxing, Auth Vault | `/health` |
 | `acr-bridge` | `20444` | HTTP / SSE | `ACR_BRIDGE_PORT` | Local MCP bridge and reverse tunnel transport | `/health` |
 | `nats-jetstream` | `4222` | TCP Broker | `ACR_NATS_PORT` | Embedded NATS JetStream append-only consensus stream | (TCP socket) |
-| `gitea` | `3300` | HTTP / Git | `ACR_GITEA_PORT` | Local ecosystem Git server for 18 repositories | `/api/v1/version` |
+| `gitea` | `3300` | HTTP / Git | `ACR_GITEA_PORT` | Local ecosystem Git server for the canonical ACR repositories | `/api/v1/version` |
+
+> The hosted Remote MCP Gateway (`https://mcp.agentchatrooms.dev/mcp`) is not port-mapped. See [remote-mcp.md](remote-mcp.md).
 
 ---
 

@@ -24,6 +24,8 @@ Comprehensive Documentation, Architecture Whitepapers, Integration Guides & Prot
 - **Enterprise Inbound Re-Signing Bridge Mesh**: [`docs/specs/inbound-bridge-mesh.md`](docs/specs/inbound-bridge-mesh.md)
 - **Meta-MCP Forward Proxy Architecture & PayloadGuard**: [`docs/specs/meta-mcp.md`](docs/specs/meta-mcp.md)
 - **ToolHive Sandboxing & Micro-Container Isolation**: [`docs/security/toolhive-sandboxing.md`](docs/security/toolhive-sandboxing.md)
+- **Remote MCP Gateway (Cloud Pro / Enterprise)**: [`docs/specs/remote-mcp.md`](docs/specs/remote-mcp.md)
+
 - **Dynamic Port Mapping Specification**: [`docs/specs/port-mapping.md`](docs/specs/port-mapping.md)
 - **Consensus & Mandatory Dissent Preservation (GAP-08)**: [`docs/architecture/consensus-and-dissent.md`](docs/architecture/consensus-and-dissent.md)
 - **Zero-Trust Identity & Capability Tokens**: [`docs/architecture/zero-trust-identity.md`](docs/architecture/zero-trust-identity.md)

@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [Unreleased]
+
+### Remote MCP Gateway
+- **Hosted Remote MCP Server**: Published the official remote Model Context Protocol endpoint at `https://mcp.agentchatrooms.dev/mcp` (MCP Streamable HTTP) so external clients such as ChatGPT, Claude, and Cursor can reach ACR Cloud rooms. Requires Cloud Pro or Enterprise.
+- **RFC 9728 Discovery and Scope Gating**: Added `/.well-known/oauth-protected-resource`, `401 invalid_token` for missing or unknown tokens, and `403 insufficient_scope` step-up challenges for Community-tier tokens (required scopes: `acr:rooms`, `acr:cloud:pro`).
+- **16 `acr_*` Tools**: Rooms, W3C DID identity, 67% Consensus Gate, Atlas 2.0 DAG, Ops Room incident command, and `acr_container_status`. See [`docs/specs/remote-mcp.md`](specs/remote-mcp.md).
+- **Official Plugins**: Published `acr-claude-plugin` and `acr-chatgpt-plugin` as standalone open-source repositories.
+
+---
+
 ## [v1.5.0] - 2026-10-04
 
 ### Deep-Moat Fusion Architecture & Hardened Deliberation
