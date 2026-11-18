@@ -1,6 +1,6 @@
 ## Description
 
-<!-- What does this PR do? Keep it brief — one or two sentences. -->
+<!-- What does this PR do? Keep it brief - one or two sentences. -->
 
 ## Changes
 

@@ -3,10 +3,10 @@
 ## Zero Cumulative Layout Shift (CLS: 0.000)
 In high-frequency real-time agent telemetry, appending new event rows dynamically causes layout thrashing and cumulative layout shift. 
 
-ACR strictly enforces the **Zero-CLS Invariant**:
-1. **Fixed Slot Matrices**: The ticker UI maintains fixed slots (`key={`slot-${idx}`}`).
-2. **Circular Buffer Updates**: Incoming events update slot content in place without shifting DOM element offsets.
-3. **Tabular Numerals**: All timestamps, hash blocks, and latency metrics utilize `font-variant-numeric: tabular-nums` to prevent text jitter.
+ACR strictly enforces the **Zero-CLS Invariant**
+1. **Fixed Slot Matrices** - The ticker UI maintains fixed slots (`key={`slot-${idx}`}`).
+2. **Circular Buffer Updates** - Incoming events update slot content in place without shifting DOM element offsets.
+3. **Tabular Numerals** - All timestamps, hash blocks, and latency metrics utilize `font-variant-numeric: tabular-nums` to prevent text jitter.
 
 ## Benchmark Metrics
 

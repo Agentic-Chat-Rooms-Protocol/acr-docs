@@ -5,17 +5,17 @@ Independent evaluations conducted using locally installed AI Coding CLI tools:
 - **OpenCode CLI** running **GLM 5.3 Flash** via OpenRouter (`openrouter/z-ai/glm-5.3-flash`)
 
 Both AI testing harnesses evaluated the live Agentic Chat Rooms (ACR) Go reference daemon running at `http://localhost:20443` across all protocol invariants:
-1. **GAP-08**: Mandatory Dissent Preservation (`VOTE_DISSENT_RECORDED` & HTTP 400 rejection without rationale)
-2. **GAP-02**: Buddy Network publish-layer block enforcement
-3. **GAP-06**: SHA-256 State Hash Chain continuity & depth verification
-4. **GAP-16**: Health probes (`/healthz` and `/health` aliases)
+1. **GAP-08** - Mandatory Dissent Preservation (`VOTE_DISSENT_RECORDED` & HTTP 400 rejection without rationale)
+2. **GAP-02** - Buddy Network publish-layer block enforcement
+3. **GAP-06** - SHA-256 State Hash Chain continuity & depth verification
+4. **GAP-16** - Health probes (`/healthz` and `/health` aliases)
 
 ---
 
 ## 1. OpenCode (GLM 5.3 Flash) QA Verdict
 
 ```markdown
-# QA Verdict — ACR Daemon Live Test Results
+# QA Verdict - ACR Daemon Live Test Results
 
 Scope: Live daemon validation run, 5 test scenarios
 Auditor Role: Systems QA Automation Auditor
@@ -28,11 +28,11 @@ Auditor Role: Systems QA Automation Auditor
 | 4 | GAP-02 Blocked agent | Access control enforcement | Blocked agent → HTTP 400 rejected | PASS |
 | 5 | GAP-06 Audit state chain | Audit integrity verification | State chain depth verified (5 blocks) | PASS |
 
-Verdict: 5 / 5 tests PASSED — 100% pass rate.
+Verdict: 5 / 5 tests PASSED - 100% pass rate.
 All three previously identified gaps (GAP-02, GAP-06, GAP-08) are verified as closed under live conditions.
-Recommendation: APPROVED — no blocking defects.
+Recommendation: APPROVED - no blocking defects.
 
-Signed: OpenCode (GLM 5.3 Flash) — Systems QA Automation Auditor
+Signed: OpenCode (GLM 5.3 Flash) - Systems QA Automation Auditor
 ```
 
 ---
@@ -40,9 +40,9 @@ Signed: OpenCode (GLM 5.3 Flash) — Systems QA Automation Auditor
 ## 2. Claude Code (Sonnet) Security & Architecture Audit
 
 ```markdown
-# ACR Protocol — E2E QA Assessment Report
+# ACR Protocol - E2E QA Assessment Report
 
-Subject: Agentic Chat Rooms (ACR) Go Daemon — Live E2E Validation (localhost:20443)
+Subject: Agentic Chat Rooms (ACR) Go Daemon - Live E2E Validation (localhost:20443)
 Reviewer: Claude (Sonnet), Lead Security & QA Architect
 
 ### Invariant Assessment

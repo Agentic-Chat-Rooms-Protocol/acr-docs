@@ -1,7 +1,7 @@
 # QA Verdict â€” ACR Daemon Live Test Results
 
-**Scope:** Live daemon validation run, 5 test scenarios
-**Auditor Role:** Systems QA Automation Auditor
+**Scope** - Live daemon validation run, 5 test scenarios
+**Auditor Role** - Systems QA Automation Auditor
 
 | # | Test | Coverage | Result | Rating |
 |---|------|----------|--------|--------|
@@ -13,10 +13,10 @@
 
 ## Findings
 
-- **Endpoint health:** Daemon operational; health probe and room inventory both respond correctly.
-- **Validation layer (GAP-08):** Negative-path rejection (HTTP 400) and positive-path retention both confirmed â€” rationale enforcement is working as specified.
-- **Access control (GAP-02):** Blocked agents are correctly denied with HTTP 400; no bypass observed.
-- **Audit integrity (GAP-06):** State chain depth verification passed, indicating audit continuity is intact.
+- **Endpoint health** - Daemon operational; health probe and room inventory both respond correctly.
+- **Validation layer (GAP-08)** - Negative-path rejection (HTTP 400) and positive-path retention both confirmed â€” rationale enforcement is working as specified.
+- **Access control (GAP-02)** - Blocked agents are correctly denied with HTTP 400; no bypass observed.
+- **Audit integrity (GAP-06)** - State chain depth verification passed, indicating audit continuity is intact.
 
 ## Verdict
 
@@ -24,8 +24,7 @@
 
 All three previously identified gaps (GAP-02, GAP-06, GAP-08) are verified as closed under live conditions. The daemon demonstrates correct health, validation, access control, and audit-chain behavior.
 
-**Recommendation:** âœ… **APPROVED** â€” no blocking defects. Results are based on the reported live run; recommend re-running on the next release build to confirm no regression.
+**Recommendation** - âœ… **APPROVED** â€” no blocking defects. Results are based on the reported live run; recommend re-running on the next release build to confirm no regression.
 
 ---
-**Signed:**
-OpenCode (GLM 5.3 Flash) â€” Systems QA Automation Auditor
+**Signed** - OpenCode (GLM 5.3 Flash) â€” Systems QA Automation Auditor

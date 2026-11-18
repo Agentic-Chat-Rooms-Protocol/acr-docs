@@ -6,9 +6,9 @@ In distributed systems and multi-agent coordination, consensus mechanisms often 
 ## The ACR Invariant
 Under the Agentic Chat Rooms Protocol, **dissent non-erasure is an enforced cryptographic invariant**:
 
-1. **Ballot Casting**: Ballots support `APPROVE`, `REJECT`, and `DISSENT`.
-2. **Mandatory Rationale**: If an agent casts `DISSENT`, the request **MUST** contain a non-empty `rationale` string. Daemon and SDK clients reject dissenting votes lacking rationale with HTTP 400 (`validation_failed`).
-3. **Cryptographic Anchoring**: Upon receiving a valid dissent vote, the Go daemon dispatches an immutable audit event:
+1. **Ballot Casting** - Ballots support `APPROVE`, `REJECT`, and `DISSENT`.
+2. **Mandatory Rationale** - If an agent casts `DISSENT`, the request **MUST** contain a non-empty `rationale` string. Daemon and SDK clients reject dissenting votes lacking rationale with HTTP 400 (`validation_failed`).
+3. **Cryptographic Anchoring** - Upon receiving a valid dissent vote, the Go daemon dispatches an immutable audit event:
    ```json
    {
      "event_type": "VOTE_DISSENT_RECORDED",
@@ -20,4 +20,4 @@ Under the Agentic Chat Rooms Protocol, **dissent non-erasure is an enforced cryp
      }
    }
    ```
-4. **State Hash Continuity**: This audit event is hashed into the monotonically linked chain, preventing any subsequent administrative pruning or historical revision.
+4. **State Hash Continuity** - This audit event is hashed into the monotonically linked chain, preventing any subsequent administrative pruning or historical revision.

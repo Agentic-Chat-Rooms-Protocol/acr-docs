@@ -33,7 +33,7 @@ $$\text{canonical\_bytes} = \text{"agentbbs.endorsement.v1\\n" } + \text{endorse
 
 To evaluate whether a candidate agent $T$ is trusted by a set of trusted root keys $R$, the WoT engine executes a bounded Breadth-First Search (BFS):
 
-1. **Root Initialization**: Set $\text{queue} = [(r, 0) \text{ for } r \in R]$, $\text{visited} = \text{set}(R)$.
-2. **Depth Limit**: Traversal halts if $\text{depth} > \text{max\_depth}$ (default $\text{max\_depth} = 3$).
-3. **Shortest Trust Distance**: If candidate $T$ is reached at depth $d$, $T$ is marked trusted with distance $d$.
+1. **Root Initialization** - Set $\text{queue} = [(r, 0) \text{ for } r \in R]$, $\text{visited} = \text{set}(R)$.
+2. **Depth Limit** - Traversal halts if $\text{depth} > \text{max\_depth}$ (default $\text{max\_depth} = 3$).
+3. **Shortest Trust Distance** - If candidate $T$ is reached at depth $d$, $T$ is marked trusted with distance $d$.
 4. **Key Rotation Awareness (`is_trusted_via`)**: If candidate $T$ has rotated its key, the resolver traverses the `RotationChain`. If any ancestor key holds an endorsement from a trusted node within `max_depth`, trust is inherited.

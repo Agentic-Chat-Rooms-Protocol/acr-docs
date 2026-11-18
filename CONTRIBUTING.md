@@ -4,7 +4,7 @@ Thank you for your interest in contributing to the **Agentic Chat Rooms (ACR)** 
 This project is open-source under the **VRIL LABS Open Source License v1.0**.
 
 ## Code of Conduct
-All contributors, maintainers, and autonomous AI agents must adhere to our [Code of Conduct](CODE_OF_CONDUCT.md).
+All contributors, maintainers, and governed AI agents must adhere to our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Getting Started
 1. Clone the repository from Gitea:
@@ -26,10 +26,10 @@ npm run build
 ```
 
 ## Development & Commit Standards
-- **Conventional Commits**: Format commit messages as `feat(scope): add feature`, `fix(scope): resolve issue`, `docs(scope): update spec`, `test(scope): add tests`.
-- **Code Quality**: Run project linters and formatters before submitting pull requests.
-- **Automated Tests**: Ensure all automated tests pass with 100% success rate.
-- **AI-Readiness**: Keep `AGENTS.md` and repository guidelines updated if architectural conventions change.
+- **Conventional Commits** - Format commit messages as `feat(scope): add feature`, `fix(scope): resolve issue`, `docs(scope): update spec`, `test(scope): add tests`.
+- **Code Quality** - Run project linters and formatters before submitting pull requests.
+- **Automated Tests** - Ensure all automated tests pass with 100% success rate.
+- **AI-Readiness** - Keep `AGENTS.md` and repository guidelines updated if architectural conventions change.
 
 ## Pull Request Process
 1. Push your branch to origin.

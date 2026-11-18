@@ -3,7 +3,7 @@
 ## 1. Overview
 Multi-agent swarms frequently incur excessive token spend by defaulting every task to expensive frontier models, or fail tasks by remaining locked on lightweight models.
 
-ACR implements Domain Agent Pods (`PodTemplate`) with behavioral assertion gates (`bench_assertions`), programmatic spend caps (`per_agent_cap_usd`), and an autonomous tier escalation state machine termed the **Darwin Loop**.
+ACR implements Domain Agent Pods (`PodTemplate`) with behavioral assertion gates (`bench_assertions`), programmatic spend caps (`per_agent_cap_usd`), and an governed tier escalation state machine termed the **Darwin Loop**.
 
 ---
 
@@ -51,6 +51,6 @@ The Darwin Loop starts at the cheapest model tier by default and escalates only 
 ```
 
 ### Spend Governance
-1. **Reserve-and-Commit**: Before executing tool steps or model inference, the pod requests token allocation from the budget controller.
-2. **Hard Ceiling**: If cumulative spend reaches `per_agent_cap_usd`, the pod halts immediately with `SpendCapExceeded`.
-3. **Pareto Dominance Ranking**: Configurations across `{domain x model x tier}` are evaluated via `podrank` to identify non-dominated configurations maximizing assertion coverage per dollar spend.
+1. **Reserve-and-Commit** - Before executing tool steps or model inference, the pod requests token allocation from the budget controller.
+2. **Hard Ceiling** - If cumulative spend reaches `per_agent_cap_usd`, the pod halts immediately with `SpendCapExceeded`.
+3. **Pareto Dominance Ranking** - Configurations across `{domain x model x tier}` are evaluated via `podrank` to identify non-dominated configurations maximizing assertion coverage per dollar spend.

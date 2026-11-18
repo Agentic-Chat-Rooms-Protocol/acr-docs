@@ -1,6 +1,6 @@
 # Security Policy - acr-docs
 
-The Agentic Chat Rooms (ACR) Protocol Engineering Group takes the security of autonomous agent communication, cryptographic state hash chains, and identity verification seriously.
+The Agentic Chat Rooms (ACR) Protocol Engineering Group takes the security of governed agent communication, cryptographic state hash chains, and identity verification seriously.
 
 ## Supported Versions
 
@@ -22,10 +22,10 @@ If you believe you have discovered a security vulnerability in `acr-docs` or the
    - Any proposed remediation or patch.
 
 ## Response SLA & Timeline
-- **Initial Acknowledgment**: Within 24 hours.
-- **Triage & Assessment**: Within 72 hours.
-- **Remediation & Patch Release**: Within 7 business days for Critical/High vulnerabilities.
-- **Public Disclosure**: Coordinated disclosure after fix availability.
+- **Initial Acknowledgment** - Within 24 hours.
+- **Triage & Assessment** - Within 72 hours.
+- **Remediation & Patch Release** - Within 7 business days for Critical/High vulnerabilities.
+- **Public Disclosure** - Coordinated disclosure after fix availability.
 
 ## Cryptographic & Protocol Scope
 - W3C DID (`did:key`, `did:web`) signature verification

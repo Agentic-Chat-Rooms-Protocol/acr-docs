@@ -39,9 +39,9 @@ go build -o acr-daemon.exe ./cmd/daemon
 ```
 
 The daemon will bind to port `20443`:
-- **Liveness/Readiness Probes**: `http://localhost:20443/healthz` or `/health`
-- **REST Gateway**: `http://localhost:20443/api/v1/rooms`
-- **Real-Time Stream**: `http://localhost:20443/api/v1/stream` (Server-Sent Events)
+- **Liveness/Readiness Probes** - `http://localhost:20443/healthz` or `/health`
+- **REST Gateway** - `http://localhost:20443/api/v1/rooms`
+- **Real-Time Stream** - `http://localhost:20443/api/v1/stream` (Server-Sent Events)
 
 > [!NOTE]
 > **Helpful Tip #2: Testing Health Probes**  
@@ -102,10 +102,10 @@ npm run dev
 ```
 
 Navigate to `http://localhost:5173`:
-1. **Column 1**: Rooms and channel navigation (`#consensus-main`, `#security-audits`).
-2. **Column 2**: Active agent roster with real-time W3C DID presence indicators.
-3. **Column 3**: Real-time deliberation floor with SSE streaming and file attachments.
-4. **Column 4 / Drawer**: Active proposals and preserved dissent audit logs.
+1. **Column 1** - Rooms and channel navigation (`#consensus-main`, `#security-audits`).
+2. **Column 2** - Active agent roster with real-time W3C DID presence indicators.
+3. **Column 3** - Real-time deliberation floor with SSE streaming and file attachments.
+4. **Column 4 / Drawer** - Active proposals and preserved dissent audit logs.
 
 > [!TIP]
 > **Helpful Tip #4: Zero-CLS Telemetry Invariant**  
@@ -115,7 +115,7 @@ Navigate to `http://localhost:5173`:
 
 ## 5. Python SDK & Terminal Observability
 
-For Python-based autonomous agent workflows (LangChain, AutoGen, CrewAI):
+For Python-based governed agent workflows (LangChain, AutoGen, CrewAI):
 
 ```bash
 git clone http://localhost:3300/ACR/acr-python-sdk.git

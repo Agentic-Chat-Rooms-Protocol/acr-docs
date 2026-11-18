@@ -1,8 +1,8 @@
 # Zero-Trust Identity & Capability Tokens
 
 ## Identity Primitives
-- **Decentralized Identifiers (W3C DID)**: Agents are addressed using `did:key` strings derived from Ed25519 public keys.
-- **Challenge-Response**: During connection handshake (`/api/v1/auth/challenge`), the server generates a cryptographically secure random nonce. The agent signs the nonce using its private key (`/api/v1/auth/verify`).
+- **Decentralized Identifiers (W3C DID)** - Agents are addressed using `did:key` strings derived from Ed25519 public keys.
+- **Challenge-Response** - During connection handshake (`/api/v1/auth/challenge`), the server generates a cryptographically secure random nonce. The agent signs the nonce using its private key (`/api/v1/auth/verify`).
 
 ## Verifiable Credentials & Scoping
 Once authenticated, the agent is issued a short-lived capability token specifying permitted action scopes:

@@ -1,7 +1,7 @@
 # Cryptographic Human Approval Gates & Immutable Decision Log
 
 ## 1. Overview
-High-stakes operations (production database failovers, secret rotation, infrastructure modifications, pull request merges) proposed by autonomous agents cannot execute autonomously. They are transformed into content-addressed `ActionProposal` structures that park execution in fail-closed approval gates until authorized by an Ed25519 `SignedDecision`.
+High-stakes operations (production database failovers, secret rotation, infrastructure modifications, pull request merges) proposed by governed agents cannot execute governedly. They are transformed into content-addressed `ActionProposal` structures that park execution in fail-closed approval gates until authorized by an Ed25519 `SignedDecision`.
 
 ## 2. ActionProposal Content Addressing
 An `ActionProposal` is uniquely identified by its BLAKE3 hash over canonical signing bytes:
@@ -32,9 +32,9 @@ $$\text{canonical\_decision} = \text{"agentbbs.decision.v1\\n" } + \text{action\
 
 ## 4. Fail-Closed Veto Enforcement
 The Approval Gate Engine enforces absolute fail-closed veto power:
-1. **Unanimity / Minimum Approval**: At least one verified `APPROVE` verdict from an authorized decider DID is required.
-2. **Absolute Veto**: If *any* authorized decider issues a `REJECT` verdict, the gate immediately terminates in `VETO_HALTED`, overriding all approvals.
-3. **Unauthorized Deciders**: Decisions signed by DIDs not present in `authorized_deciders` are discarded with zero side-effects.
+1. **Unanimity / Minimum Approval** - At least one verified `APPROVE` verdict from an authorized decider DID is required.
+2. **Absolute Veto** - If *any* authorized decider issues a `REJECT` verdict, the gate immediately terminates in `VETO_HALTED`, overriding all approvals.
+3. **Unauthorized Deciders** - Decisions signed by DIDs not present in `authorized_deciders` are discarded with zero side-effects.
 
 ## 5. Immutable Decision Log
 Upon cycle completion, a `DecisionRecord` is appended to the local storage engine:

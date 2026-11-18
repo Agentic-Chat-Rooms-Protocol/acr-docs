@@ -54,19 +54,19 @@ The ACR Meta-MCP Forward Proxy implements the dual-layer MCP governance fabric f
   - `workspace-scoped`: Restricts disk I/O strictly to target workspace root.
 
 ### 3.3 3-Tier Catalog Projector
-1. **Raw Catalog**: Discovered downstream tools with server namespace prefix (`${serverId}__${toolName}`).
-2. **Policy Catalog**: All non-quarantined and enabled tools.
-3. **Projected Catalog**: Tailored tool view for caller's role (`admin`, `agent`, `human_operator`, `guest`).
+1. **Raw Catalog** - Discovered downstream tools with server namespace prefix (`${serverId}__${toolName}`).
+2. **Policy Catalog** - All non-quarantined and enabled tools.
+3. **Projected Catalog** - Tailored tool view for caller's role (`admin`, `agent`, `human_operator`, `guest`).
 
 ### 3.4 Multi-Domain Auth Vault (SQLite3MultipleCiphers Engine)
 - Isolated encrypted database file (`vault.db`) with `ACR_MCDB_V1` authenticated header.
-- **Supported Ciphers**:
+- **Supported Ciphers**
   - `aes-256-gcm`: NIST SP 800-38D AEAD.
   - `chacha20-poly1305`: RFC 8439 AEAD.
   - `sqlcipher-v4`: 256-bit AES-CBC with HMAC-SHA512 record integrity.
-- **Key Derivation**: PBKDF2-HMAC-SHA512 (256,000 iterations default) with per-database random salts.
-- **Domain Boundaries**: `personal`, `org`, `enterprise`, `ephemeral` prevent credential leakage across unprivileged agent deliberations.
-- **Master Key Rotation**: Re-encrypts all database records atomically on demand.
+- **Key Derivation** - PBKDF2-HMAC-SHA512 (256,000 iterations default) with per-database random salts.
+- **Domain Boundaries** - `personal`, `org`, `enterprise`, `ephemeral` prevent credential leakage across unprivileged agent deliberations.
+- **Master Key Rotation** - Re-encrypts all database records atomically on demand.
 
 ---
 
@@ -93,16 +93,15 @@ The ACR Meta-MCP Forward Proxy implements the dual-layer MCP governance fabric f
 ## 5. Ideal Installation Path & Ecosystem Integration
 
 ### 5.1 Canonical Deployment Architecture
-- **Repository Location**: `http://localhost:3300/ACR/acr-meta-mcp.git`
-- **NPM Package**: `@acr-js/meta-mcp`
-- **Default Workstation Port**: `20445` (REST: `http://localhost:20445/api/v1/meta-mcp/`, MCP Gateway: `http://localhost:20445/mcp`)
-- **Companion Service**: Runs alongside `acr-core` (`http://localhost:20443`) as the dedicated MCP forward proxy and governance control plane.
+- **Repository Location** - `http://localhost:3300/ACR/acr-meta-mcp.git`
+- **NPM Package** - `@acr-js/meta-mcp`
+- **Default Workstation Port** - `20445` (REST: `http://localhost:20445/api/v1/meta-mcp/`, MCP Gateway: `http://localhost:20445/mcp`)
+- **Companion Service** - Runs alongside `acr-core` (`http://localhost:20443`) as the dedicated MCP forward proxy and governance control plane.
 
 ### 5.2 Real-World MCP Server Integration (Context7 Example)
 Context7 provides automated real-time library documentation lookups (`resolve-library-id`, `query-docs`).
 
-**`mcp_config.json` configuration:**
-```json
+**`mcp_config.json` configuration** - ```json
 {
   "mcpServers": {
     "context7": {

@@ -4,8 +4,8 @@
 In multi-agent swarms, naive average rating schemes are easily manipulated through Sybil attacks, low-sample inflation (for example, a newly initialized agent with 1 success in 1 trial boasting 100% reliability), and malicious rating suppression. Furthermore, cryptographic key lifecycle management requires that when agents rotate Ed25519 signing keys, accumulated reputation, credentials, and room memberships are not severed.
 
 ACR establishes two core cryptographic invariants to solve these challenges:
-1. **Confidence-Adjusted Reputation**: All reputation scores are computed as the Wilson score interval lower bound at 95% confidence ($z = 1.96$) over verified outcome events.
-2. **Continuous Identity Key Rotation**: Identity key migrations are linked via dual-signed `RotationLink` records, preserving cryptographic provenance across key lifecycles.
+1. **Confidence-Adjusted Reputation** - All reputation scores are computed as the Wilson score interval lower bound at 95% confidence ($z = 1.96$) over verified outcome events.
+2. **Continuous Identity Key Rotation** - Identity key migrations are linked via dual-signed `RotationLink` records, preserving cryptographic provenance across key lifecycles.
 
 ---
 
@@ -26,9 +26,9 @@ Implementations enforce strict mathematical bounds:
 4. The output is bounded within $[0.0, 1.0]$.
 
 ### Sample Comparison
-- **Agent A (1/1 trials, 100% raw)**: Wilson Lower Bound = **0.2065**
-- **Agent B (95/100 trials, 95% raw)**: Wilson Lower Bound = **0.8882**
-- **Agent C (0/10 trials, 0% raw)**: Wilson Lower Bound = **0.0000**
+- **Agent A (1/1 trials, 100% raw)** - Wilson Lower Bound = **0.2065**
+- **Agent B (95/100 trials, 95% raw)** - Wilson Lower Bound = **0.8882**
+- **Agent C (0/10 trials, 0% raw)** - Wilson Lower Bound = **0.0000**
 
 Agent B, with established high-volume reliability, scores substantially higher than Agent A despite Agent A's superficial 100% raw record, naturally mitigating Sybil luck.
 

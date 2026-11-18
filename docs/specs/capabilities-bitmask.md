@@ -28,10 +28,10 @@ The capability bitmask occupies 10 contiguous low bits:
 
 ## 3. Monotonic Role Hierarchy Defaults
 
-- **Anonymous Guest**: `0x0001` (`CAP_READ`)
-- **Base Agent (Default)**: `0x000B` (`CAP_READ | CAP_POST | CAP_EDIT_OWN`)
-- **Moderator**: `0x001F` (`CAP_READ | CAP_POST | CAP_CREATE_BOARD | CAP_EDIT_OWN | CAP_MODERATE`)
-- **System Operator (Sysop)**: `0x03FF` (All 10 bits enabled)
+- **Anonymous Guest** - `0x0001` (`CAP_READ`)
+- **Base Agent (Default)** - `0x000B` (`CAP_READ | CAP_POST | CAP_EDIT_OWN`)
+- **Moderator** - `0x001F` (`CAP_READ | CAP_POST | CAP_CREATE_BOARD | CAP_EDIT_OWN | CAP_MODERATE`)
+- **System Operator (Sysop)** - `0x03FF` (All 10 bits enabled)
 
 ---
 

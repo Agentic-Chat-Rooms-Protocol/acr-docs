@@ -36,12 +36,12 @@ The `.rvf` layout is engineered for memory-mapped I/O and zero-copy deserializat
 
 To eliminate linear scanning across large memory banks, `LshIndex` uses 64 deterministic hyperplanes generated via pseudorandom projection seeds:
 
-1. **Deterministic Projection**: 64 hyperplanes $\vec{H}_0, \vec{H}_1, \dots, \vec{H}_{63}$ spanning $\mathbb{R}^d$ are derived deterministically:
+1. **Deterministic Projection** - 64 hyperplanes $\vec{H}_0, \vec{H}_1, \dots, \vec{H}_{63}$ spanning $\mathbb{R}^d$ are derived deterministically:
    $$\text{bit}_i = \begin{cases} 1 & \text{if } \vec{v} \cdot \vec{H}_i \ge 0 \\ 0 & \text{otherwise} \end{cases}$$
-2. **64-Bit Signature**: Each vector is compressed into a 64-bit integer bitmask:
+2. **64-Bit Signature** - Each vector is compressed into a 64-bit integer bitmask:
    $$\text{sig}(\vec{v}) = \sum_{i=0}^{63} \text{bit}_i \cdot 2^i$$
-3. **Hamming Distance Pruning**: Given query vector $\vec{q}$, candidate vectors are rapidly filtered by bitwise XOR and popcount:
+3. **Hamming Distance Pruning** - Given query vector $\vec{q}$, candidate vectors are rapidly filtered by bitwise XOR and popcount:
    $$\text{dist}_{\text{Hamming}}(\vec{q}, \vec{v}) = \text{popcount}(\text{sig}(\vec{q}) \oplus \text{sig}(\vec{v}))$$
-4. **Exact Cosine Re-Ranking**: The top $M$ candidates (typically $M = 32$) with the smallest Hamming distances are evaluated using exact cosine similarity:
+4. **Exact Cosine Re-Ranking** - The top $M$ candidates (typically $M = 32$) with the smallest Hamming distances are evaluated using exact cosine similarity:
    $$\text{cosine}(\vec{q}, \vec{v}) = \frac{\vec{q} \cdot \vec{v}}{\|\vec{q}\| \|\vec{v}\|}$$
-5. **Fallback Safety**: If the index record count diverges from the underlying storage record count, the engine automatically falls back to an exact brute-force scan.
+5. **Fallback Safety** - If the index record count diverges from the underlying storage record count, the engine automatically falls back to an exact brute-force scan.
