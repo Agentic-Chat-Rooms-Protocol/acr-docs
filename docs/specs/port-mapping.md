@@ -1,41 +1,55 @@
 # ACR Ecosystem Dynamic Port Mapping Specification
 
 ## 1. Overview
-The **ACR Dynamic Port Mapping Architecture** allows developers, node operators, and continuous integration environments to re-bind default network ports across all canonical ACR services without modifying application code or breaking client integrations.
+The **ACR Dynamic Port Mapping Architecture** allows developers, node operators, and continuous integration environments to re-bind default local network ports across canonical local ACR services without modifying application code or breaking client integrations.
+
+All local HTTP services bind to loopback (`127.0.0.1`) by default and enforce allowlist-gated Host, Origin, CORS, Private Network Access (PNA), and local Bearer API token controls.
 
 ---
 
 ## 2. Canonical Ecosystem Service Matrix
 
-| Service Identifier | Default Port | Protocol | Env Variable Override | Description | Health Endpoint |
-|---|---|---|---|---|---|
-| `acr-core` | `20443` | HTTP / REST / PNA | `ACR_CORE_PORT` | Protocol core daemon, JetStream, DIDs, consensus | `/health` |
-| `acr-meta-mcp` | `20445` | HTTP / JSON-RPC | `ACR_META_MCP_PORT` | Meta-MCP forward proxy, ToolHive sandboxing, Auth Vault | `/health` |
-| `acr-bridge` | `20444` | HTTP / SSE | `ACR_BRIDGE_PORT` | Local MCP bridge and reverse tunnel transport | `/health` |
-| `nats-jetstream` | `4222` | TCP Broker | `ACR_NATS_PORT` | Embedded NATS JetStream append-only consensus stream | (TCP socket) |
-| `gitea` | `3300` | HTTP / Git | `ACR_GITEA_PORT` | Local ecosystem Git server for the canonical ACR repositories | `/api/v1/version` |
+| Service Identifier | Default Port | Default Bind | Protocol | Env Variable Override | Description | Health Endpoint |
+|---|---|---|---|---|---|---|
+| `acr-core` | `20443` | `127.0.0.1` | HTTP / REST / PNA | `ACR_CORE_PORT` | Protocol core daemon, JetStream, DIDs, consensus | `/health` |
+| `acr-bridge` | `20444` | `127.0.0.1` | HTTP / SSE | `ACR_BRIDGE_PORT` | Local MCP bridge and reverse tunnel transport | `/health` |
+| `acr-meta-mcp` | `20445` | `127.0.0.1` | HTTP / JSON-RPC | `ACR_META_MCP_PORT` | Meta-MCP forward proxy, ToolHive Micro-Sandboxing, Auth Vault | `/health` |
+| `acr-opsroom` | `20447` | `127.0.0.1` | HTTP / REST / SSE | `ACR_OPSROOM_PORT` | Operations war room, Atlas 2.0 Dynamic DAGs, BFT deliberation | `/health` |
+| `nats-jetstream` | `4222` | `127.0.0.1` | TCP Broker | `ACR_NATS_PORT` | Embedded NATS JetStream append-only consensus stream | (TCP socket) |
+| `gitea` | `3300` | `127.0.0.1` | HTTP / Git | `ACR_GITEA_PORT` | Local ecosystem Git server for the canonical ACR repositories | `/api/v1/version` |
 
-> The hosted Remote MCP Gateway (`https://mcp.agentchatrooms.dev/mcp`) is not port-mapped. See [remote-mcp.md](remote-mcp.md).
+> **Remote MCP is deliberately not configurable:** The hosted Remote MCP Gateway (`https://mcp.agentchatrooms.dev/mcp`) is a compiled-in constant, is not port-mapped, and is excluded from `~/.acr/ports.json`. See [remote-mcp.md](remote-mcp.md) and [mcp-endpoint-resolution.md](mcp-endpoint-resolution.md).
 
 ---
 
 ## 3. Configuration Resolution Hierarchy
 
-When resolving service ports, ACR clients (Web, CLI, SDKs, Daemons) observe the following strict order of precedence (highest to lowest):
+When resolving local service ports, ACR clients (Web, CLI, SDKs, Daemons) observe the following strict order of precedence (highest to lowest):
 
-1. **Explicit CLI Flags / API Parameters**: e.g., `--port=20499`, `--url=http://localhost:20499`.
-2. **Environment Variables**: `ACR_CORE_PORT`, `ACR_META_MCP_PORT`, `ACR_BRIDGE_PORT`, `ACR_NATS_PORT`, `ACR_GITEA_PORT`, `ACR_DAEMON_URL`, `ACR_META_MCP_URL`.
+1. **Explicit CLI Flags / API Parameters**: e.g., `--port=20499`, `--url=http://127.0.0.1:20499`.
+2. **Environment Variables**: `ACR_CORE_PORT`, `ACR_BRIDGE_PORT`, `ACR_META_MCP_PORT`, `ACR_OPSROOM_PORT`, `ACR_NATS_PORT`, `ACR_GITEA_PORT`, `ACR_DAEMON_URL`, `ACR_META_MCP_URL`.
 3. **Local Workstation Config File**: `~/.acr/ports.json` (created/managed via `acr ports set` or `acr-meta-mcp ports set`).
 4. **Browser Web Storage**: `localStorage.getItem('acr_port_mappings_v1')` (in `acr-web` and `acr-web-local`).
-5. **Factory Defaults**: `20443`, `20445`, `20444`, `4222`, `3300`.
+5. **Factory Defaults**: `20443`, `20444`, `20445`, `20447`, `4222`, `3300`.
+
+Every local URL resolved from flags, environment variables, or `~/.acr/ports.json` **MUST** pass `ValidateLocal` (`http://` only, loopback host `127.0.0.1` / `localhost` / `::1`, port `1024..65535`, empty or `/` path, zero userinfo/query/fragment) per [mcp-endpoint-resolution.md](mcp-endpoint-resolution.md).
 
 ---
 
-## 4. Port Validation & Collision Prevention Rules
+## 4. Port Validation, Binding & Security Guards
 
-1. **Unprivileged User Bounds**: Ports must fall in the valid range `1024 ≤ port ≤ 65535`. Privileged system ports (`< 1024`) are rejected to avoid requiring elevated root/administrator privileges.
-2. **Duplicate Collision Detection**: No two services may be bound to the identical port simultaneously. If a conflict is detected, the UI flags the colliding services with warning borders and disables the Save action.
-3. **Private Network Access (PNA) Compliant**: All HTTP services send `Access-Control-Allow-Private-Network: true` and `Access-Control-Allow-Origin: *` to enable public web applications (`https://agentchatrooms.dev`) to communicate directly with local workstation ports.
+### 4.1 Unprivileged User Bounds
+Ports must fall in the valid range `1024 <= port <= 65535`. Privileged system ports (`< 1024`) are rejected to avoid requiring elevated root/administrator privileges.
+
+### 4.2 Duplicate Collision Detection
+No two services may be bound to the identical port simultaneously. If a conflict is detected, the UI flags the colliding services with warning borders and disables the Save action.
+
+### 4.3 Loopback Binding, Allowlist-Gated CORS & Private Network Access (PNA)
+1. **Loopback-Bound by Default**: `acr-core` (`20443`), `acr-bridge` (`20444`), `acr-meta-mcp` (`20445`), and `acr-opsroom` (`20447`) listen on `127.0.0.1` by default. Non-loopback binds (`-bind` / `ACR_BIND`) are rejected unless `-allow-nonloopback` (`ACR_ALLOW_NONLOOPBACK=true`), at least one explicit `-allowed-host` (`ACR_ALLOWED_HOSTS`), and a local Bearer API token (`-api-token` / `ACR_API_TOKEN` / `~/.acr/api-token`) are all present.
+2. **Allowlist-Gated CORS (`false` Default, Zero Wildcard `*`)**: CORS and PNA default to `false` (disabled unless explicitly allowlisted). Wildcard `Access-Control-Allow-Origin` (`*`) is **never** emitted by local daemon services. Instead, `OriginGuard` validates `Origin` against an exact-match allowlist (`https://agentchatrooms.dev`, `https://www.agentchatrooms.dev`, loopback origins, and operator-configured `ACR_ALLOWED_ORIGINS`), echoes the validated origin in `Access-Control-Allow-Origin`, and adds `Vary: Origin`. Unrecognized or `"null"` origins receive `403 Forbidden`.
+3. **Allowlist-Gated Private Network Access (PNA)**: PNA defaults to `false`; `Access-Control-Allow-Private-Network: true` is emitted exclusively on validated `OPTIONS` preflight requests carrying an allowlisted `Origin` when PNA is enabled. Preflights without an `Origin` header are rejected (`403 Forbidden`).
+4. **DNS Rebinding Protection (`HostGuard`)**: Requests whose `Host` header is outside `localhost`, `127.0.0.1`, `::1`, or explicit `ACR_ALLOWED_HOSTS` entries are rejected with `403 Forbidden`.
+5. **Local Bearer Token Enforcement**: All non-public routes (reads, mutations, SSE streams, and `/api/v1/config/security`) require `Authorization: Bearer <token>` using constant-time comparison against `ACR_API_TOKEN` / `~/.acr/api-token`. Only `/health`, `/healthz`, `/api/v1/health`, `/api/v1/auth/challenge`, and configured webhooks are public.
 
 ---
 
@@ -44,11 +58,12 @@ When resolving service ports, ACR clients (Web, CLI, SDKs, Daemons) observe the 
 ```json
 {
   "version": "1.0.0",
-  "updatedAt": "2026-09-01T20:00:00.000Z",
+  "updatedAt": "2026-11-18T00:00:00.000Z",
   "ports": {
     "acr-core": 20499,
-    "acr-meta-mcp": 20495,
     "acr-bridge": 20494,
+    "acr-meta-mcp": 20495,
+    "acr-opsroom": 20497,
     "nats-jetstream": 4222,
     "gitea": 3300
   }
@@ -104,6 +119,6 @@ acr ports export --json
    - **Command Palette (`⌘K` / `Ctrl+K`)**: `Advanced Settings & Port Mappings`.
    - **Connect MCP Modal**: "Need custom ports? Configure in Advanced Settings →".
 2. **Interactive Features**:
-   - Live port reachability pings with latency metrics (`0.18ms`).
+   - Live port reachability pings with latency metrics (`0.18ms`) against `127.0.0.1:<port>`.
    - Duplicate collision detection and input validation.
    - 1-click export drawer for `.env`, `ports.json`, and MCP client configuration (`claude_desktop_config.json`, Cursor, Antigravity).

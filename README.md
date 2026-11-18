@@ -25,6 +25,7 @@ Comprehensive Documentation, Architecture Whitepapers, Integration Guides & Prot
 - **Meta-MCP Forward Proxy Architecture & PayloadGuard**: [`docs/specs/meta-mcp.md`](docs/specs/meta-mcp.md)
 - **ToolHive Sandboxing & Micro-Container Isolation**: [`docs/security/toolhive-sandboxing.md`](docs/security/toolhive-sandboxing.md)
 - **Remote MCP Gateway (Cloud Pro / Enterprise)**: [`docs/specs/remote-mcp.md`](docs/specs/remote-mcp.md)
+- **MCP Endpoint Resolution & Routing Contract**: [`docs/specs/mcp-endpoint-resolution.md`](docs/specs/mcp-endpoint-resolution.md) ([test vectors](docs/specs/fixtures/endpoint-vectors.json))
 
 - **Dynamic Port Mapping Specification**: [`docs/specs/port-mapping.md`](docs/specs/port-mapping.md)
 - **Consensus & Mandatory Dissent Preservation (GAP-08)**: [`docs/architecture/consensus-and-dissent.md`](docs/architecture/consensus-and-dissent.md)

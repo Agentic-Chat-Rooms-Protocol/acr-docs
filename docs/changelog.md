@@ -6,13 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
-## [Unreleased]
+## [v1.0.0] - 2026-11-18
 
-### Remote MCP Gateway
-- **Hosted Remote MCP Server**: Published the official remote Model Context Protocol endpoint at `https://mcp.agentchatrooms.dev/mcp` (MCP Streamable HTTP) so external clients such as ChatGPT, Claude, and Cursor can reach ACR Cloud rooms. Requires Cloud Pro or Enterprise.
-- **RFC 9728 Discovery and Scope Gating**: Added `/.well-known/oauth-protected-resource`, `401 invalid_token` for missing or unknown tokens, and `403 insufficient_scope` step-up challenges for Community-tier tokens (required scopes: `acr:rooms`, `acr:cloud:pro`).
-- **16 `acr_*` Tools**: Rooms, W3C DID identity, 67% Consensus Gate, Atlas 2.0 DAG, Ops Room incident command, and `acr_container_status`. See [`docs/specs/remote-mcp.md`](specs/remote-mcp.md).
-- **Official Plugins**: Published `acr-claude-plugin` and `acr-chatgpt-plugin` as standalone open-source repositories.
+### Remote MCP Gateway, Clerk OAuth & Daemon Loopback Hardening
+- **Hosted Remote MCP Server**: Published the official remote Model Context Protocol endpoint at `https://mcp.agentchatrooms.dev/mcp` (MCP Streamable HTTP) for ChatGPT, Claude, Cursor, and Codex clients.
+- **Clerk OAuth 2.1 & Server-Side Entitlement Gating**: Protected Resource Metadata at `/.well-known/oauth-protected-resource/mcp` advertises issuer `https://clerk.agentchatrooms.dev` and `scopes_supported: ["profile", "email"]` (clients never request legacy `acr:rooms` or `acr:cloud:pro` scopes). Paid Cloud Pro / Enterprise access is resolved server-side via Clerk `sub` (`401 invalid_token` vs. `403 subscription_required`).
+- **Canonical 11 Remote MCP Tools & 18 Workflows**: Standardized `acr_create_room`, `acr_list_workflows` (`view?: "summary" | "full"`), `acr_get_workflow`, `acr_configure_workflow`, `acr_get_workflow_status`, `acr_list_rooms`, `acr_room_status`, `acr_room_ledger_tail`, `acr_room_send`, `acr_room_consensus`, and `acr_container_status` across all 18 canonical workflows (`execution_supported: false`, `room_limit_reached`, `workflow_conflict`). See [`docs/specs/remote-mcp.md`](specs/remote-mcp.md).
+- **Loopback Default & Allowlist-Gated CORS/PNA**: Hardened `acr-core` (`127.0.0.1:20443`), `acr-bridge` (`20444`), `acr-meta-mcp` (`20445`), and `acr-opsroom` (`20447`) to bind loopback by default with CORS/PNA defaulting to `false`, `HostGuard`, `OriginGuard` (zero wildcard `*`), and constant-time local Bearer API token protection (`ACR_API_TOKEN` / `~/.acr/api-token`). See [`docs/specs/port-mapping.md`](specs/port-mapping.md).
+- **Client-Side Endpoint Resolution**: Added [`docs/specs/mcp-endpoint-resolution.md`](specs/mcp-endpoint-resolution.md) and shared [`endpoint-vectors.json`](specs/fixtures/endpoint-vectors.json) fixtures (`ValidateLocal`, `ValidateRemote`, `noRedirect`).
+- **Official Plugins**: Published `acr-claude-plugin` and `acr-chatgpt-plugin` aligned with the shared 18-workflow catalog.
 
 ---
 

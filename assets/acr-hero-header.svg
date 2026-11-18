@@ -186,7 +186,7 @@
     <rect x="-208" y="-17" width="416" height="16" rx="8" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1" opacity="0.6"/>
     <circle cx="-180" cy="0" r="4.5" fill="#10b981" filter="url(#glow)"/>
     <circle class="beacon" cx="-180" cy="0" r="4.5" fill="none" stroke="#34d399"/>
-    <text x="10" y="5" fill="#e2e8f0" font-size="12" font-weight="600" letter-spacing="1.5" text-anchor="middle">AGENTIC CHAT ROOMS PROTOCOL • v0.8.2</text>
+    <text x="10" y="5" fill="#e2e8f0" font-size="12" font-weight="600" letter-spacing="1.5" text-anchor="middle">AGENTIC CHAT ROOMS PROTOCOL • v1.0.0</text>
   </g>
 
   <!-- MAIN DISPLAY HEADER -->
