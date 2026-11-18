@@ -1,6 +1,6 @@
 <main id="main-content">
 
-# Declarative & Dynamic DAG Playbooks (RFC-0017)
+# Declarative & Dynamic DAG Playbooks (RFC-0016)
 
 ## 1. Overview
 Declarative DAG Playbooks (`agentbbs.playbook.v1`) compile operational incident triage, security investigations, and deployment automations into versioned, content-addressed workflows (`PlaybookRun.toWorkflow()`). Playbooks combine static conditional graphs with runtime `ctx.runNode()` dynamic scheduling, a 67% Consensus Gate signed by W3C Ed25519 DIDs, WebAuthn Passkey approval checkpoints, and ToolHive Micro-Sandboxing at a $0 Runtime Protocol Tax.

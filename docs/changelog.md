@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
-## [v1.0.0] - 2026-11-18
+## [v1.0.0] - 2026-11-18 (Protocol Standard v1.0.0)
 
 ### Remote MCP Gateway, Clerk OAuth & Daemon Loopback Hardening
 - **Hosted Remote MCP Server**: Published the official remote Model Context Protocol endpoint at `https://mcp.agentchatrooms.dev/mcp` (MCP Streamable HTTP) for ChatGPT, Claude, Cursor, and Codex clients.
